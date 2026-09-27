@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, 
   Menu, 
@@ -25,6 +25,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [storyModalOpen, setStoryModalOpen] = useState(false);
+  const videoRef = useRef(null);
 
   const slides = [
     {
@@ -56,14 +57,25 @@ export default function App() {
     }
   ];
 
-  // Auto-advance slides every 6 seconds if playing
+  // Auto-advance slides only when not on video slide
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || currentSlide === 0) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
-  }, [isPlaying, slides.length]);
+  }, [isPlaying, slides.length, currentSlide]);
+
+  const toggleVideoPlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -167,14 +179,27 @@ export default function App() {
                 idx === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
             >
-              <img 
-                src={slide.image} 
-                alt={slide.subhead}
-                onError={(e) => {
-                  e.currentTarget.src = slide.fallbackImage;
-                }}
-                className="w-full h-full object-cover object-center filter contrast-[1.03]"
-              />
+              {idx === 0 ? (
+                <video
+                  ref={videoRef}
+                  src="/assets/bbd-applytoday-v3.mp4"
+                  poster="/assets/hero-greenhouse.jpg"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover object-center filter contrast-[1.03]"
+                />
+              ) : (
+                <img 
+                  src={slide.image} 
+                  alt={slide.subhead}
+                  onError={(e) => {
+                    e.currentTarget.src = slide.fallbackImage;
+                  }}
+                  className="w-full h-full object-cover object-center filter contrast-[1.03]"
+                />
+              )}
               <div className="absolute inset-0 bg-black/10"></div>
             </div>
           ))}
@@ -188,9 +213,9 @@ export default function App() {
           {/* Bottom-Right Pause/Play Toggle Button (Exact match to screenshot) */}
           <div className="absolute bottom-5 sm:bottom-8 right-4 sm:right-6 z-30">
             <button 
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={toggleVideoPlay}
               className="w-9 h-9 sm:w-11 sm:h-11 bg-black/75 hover:bg-black text-white rounded-none flex items-center justify-center backdrop-blur-md transition-all border border-white/20 shadow-lg active:scale-95 cursor-pointer"
-              title={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
+              title={isPlaying ? 'Pause video' : 'Play video'}
             >
               {isPlaying ? (
                 <div className="flex gap-1 items-center justify-center">

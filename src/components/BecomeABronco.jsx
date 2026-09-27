@@ -5,7 +5,7 @@ export default function BecomeABronco() {
   const cards = [
     {
       id: 1,
-      image: '/assets/horses-and-mtns.jpg',
+      image: '/assets/bronco-horses.jpg',
       label: 'FIND YOUR PASSION',
       href: '#majors-finder'
     },
@@ -47,15 +47,12 @@ export default function BecomeABronco() {
             href={card.href}
             className="group relative block aspect-[4/3] sm:aspect-[1/1] lg:aspect-[4/3] w-full overflow-hidden shadow-lg border-b-4 border-[#A6192E] transition-all transform hover:-translate-y-1 hover:shadow-2xl"
           >
-            {/* Background Image with Cal Poly Green Duotone Tint */}
+            {/* Official Cal Poly Pomona Duotone Image */}
             <img
               src={card.image}
               alt={card.label}
-              className="w-full h-full object-cover filter contrast-125 transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-
-            {/* Green Tint Overlay */}
-            <div className="absolute inset-0 bg-[#004731]/35 mix-blend-multiply transition-opacity group-hover:bg-[#004731]/20"></div>
 
             {/* Gold Central Action Box Button (Exact Match to Screenshot) */}
             <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">

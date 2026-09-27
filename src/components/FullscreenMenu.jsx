@@ -40,30 +40,13 @@ export default function FullscreenMenu({ isOpen, onClose }) {
       {/* 1. Menu Top Header (Exact Match to Image 4) */}
       <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-8 py-5 flex items-center justify-between border-b border-emerald-800/60 shrink-0">
         
-        {/* Cal Poly Pomona Logo with Gold Shield */}
+        {/* Cal Poly Pomona Logo */}
         <a href="/" onClick={onClose} className="flex items-center gap-3">
-          <div className="w-10 h-10 shrink-0">
-            <svg viewBox="0 0 100 120" className="w-full h-full">
-              <path 
-                d="M10 10 H90 V70 C90 95 50 115 50 115 C50 115 10 95 10 70 Z" 
-                fill="#004731" 
-                stroke="#FFB81C" 
-                strokeWidth="5" 
-              />
-              <path 
-                d="M30 65 Q 40 40 50 25 Q 60 40 70 65" 
-                fill="none" 
-                stroke="#FFB81C" 
-                strokeWidth="4" 
-              />
-              <polygon points="50,22 42,75 58,75" fill="#FFB81C" />
-              <rect x="47" y="75" width="6" height="20" fill="#FFB81C" />
-              <circle cx="50" cy="18" r="3" fill="#A4D65E" />
-            </svg>
-          </div>
-          <span className="font-serif text-2xl font-bold text-[#FFB81C] tracking-tight">
-            Cal Poly Pomona
-          </span>
+          <img 
+            src="/assets/cpp_logo_horizontal.png" 
+            alt="Cal Poly Pomona" 
+            className="h-9 sm:h-11 w-auto object-contain brightness-0 invert"
+          />
         </a>
 
         {/* Right Nav Action Links */}

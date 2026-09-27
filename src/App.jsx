@@ -88,34 +88,12 @@ export default function App() {
         <div className="max-w-[1600px] mx-auto flex items-center justify-between">
           
           {/* Cal Poly Pomona Logo */}
-          <a href="/" className="flex items-center gap-3 sm:gap-3.5 group">
-            {/* Authentic Cal Poly Pomona Crest Shield with CLA Tower & Palm Tree */}
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0">
-              <svg viewBox="0 0 100 120" className="w-full h-full drop-shadow-sm">
-                <path 
-                  d="M10 10 H90 V70 C90 95 50 115 50 115 C50 115 10 95 10 70 Z" 
-                  fill="#004731" 
-                  stroke="#FFB81C" 
-                  strokeWidth="5" 
-                />
-                <path 
-                  d="M30 65 Q 40 40 50 25 Q 60 40 70 65" 
-                  fill="none" 
-                  stroke="#FFB81C" 
-                  strokeWidth="4" 
-                />
-                <polygon points="50,22 42,75 58,75" fill="#FFB81C" />
-                <rect x="47" y="75" width="6" height="20" fill="#FFB81C" />
-                <circle cx="50" cy="18" r="3" fill="#A4D65E" />
-              </svg>
-            </div>
-
-            {/* Wordmark */}
-            <div className="flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl md:text-[27px] font-bold text-[#004731] tracking-tight leading-none">
-                Cal Poly Pomona
-              </span>
-            </div>
+          <a href="/" className="flex items-center group">
+            <img 
+              src="/assets/cpp_logo_horizontal.png" 
+              alt="Cal Poly Pomona" 
+              className="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+            />
           </a>
 
           {/* Quick Nav Links (APPLY, VISIT, INFO, GIVE, MYCPP) */}

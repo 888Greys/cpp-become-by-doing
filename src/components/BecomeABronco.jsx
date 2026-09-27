@@ -5,7 +5,7 @@ export default function BecomeABronco() {
   const cards = [
     {
       id: 1,
-      image: '/assets/bronco-horses.jpg',
+      image: '/assets/horses-and-mtns.jpg',
       label: 'FIND YOUR PASSION',
       href: '#majors-finder'
     },

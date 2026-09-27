@@ -7,34 +7,34 @@ export default function CampusProvingGrounds() {
   const landmarks = [
     {
       id: 1,
-      name: 'CLA Tower & Aratani Japanese Garden',
-      tag: 'ARCHITECTURAL LANDMARK',
-      desc: 'The iconic triangular tower rising above the San Gabriel Valley, bordered by traditional Japanese koi ponds and bonsai groves.',
-      image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&w=1200&q=80',
-      telemetry: 'LAT: 34.0564° N // LNG: -117.8215° W // ELEV: 245M'
+      name: 'Cal Poly Rose Float Design & Fabrication Lab',
+      tag: 'CAL POLY TRADITION',
+      desc: 'The only student-built float in the Tournament of Roses Parade, combining pneumatic hydraulic animation and organic flora design.',
+      image: '/assets/rose-float.jpg',
+      telemetry: 'HYDRAULIC PSI: 2,400 // EMBEDDED ACTUATORS: 48 // ROSE DENSITY'
     },
     {
       id: 2,
-      name: 'The Farm Store & 700-Acre Spadra Fields',
-      tag: 'AGRICULTURAL PRODUCTION',
-      desc: 'Commercial citrus groves, avocado orchards, and hydroponic produce managed directly by undergraduate agriculture students.',
-      image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80',
-      telemetry: 'SOIL MOISTURE: 34% // REGENERATIVE ZONE B // TRACTOR FLEET'
+      name: 'Macias Architectural Design Studios',
+      tag: 'DESIGN-BUILD STUDIOS',
+      desc: 'Top-ranked NAAB accredited architecture and landscape studios overlooking the valley with 24/7 laser and CNC prototyping yards.',
+      image: '/assets/macias-studio.jpg',
+      telemetry: 'FAB LAB STATUS: ACTIVE // 5-AXIS CNC // STUDIO LEVEL 3'
     },
     {
       id: 3,
-      name: 'Lyle Center for Regenerative Studies',
-      tag: 'CARBON-NEUTRAL LIVING LAB',
-      desc: '16-acre net-zero ecosystem modeling passive solar architecture, greywater reclamation, and renewable solar microgrids.',
-      image: 'https://images.unsplash.com/photo-1508873696983-2df57036476b?auto=format&fit=crop&w=1200&q=80',
-      telemetry: 'SOLAR PV: 240 KW // GREYWATER: 100% // EMBODIED CARBON: 0'
+      name: 'BRIC 53-Foot Climbing Wall & Wellness Complex',
+      tag: 'STUDENT RECREATION & FITNESS',
+      desc: '165,000 sq.ft. LEED Gold recreation facility featuring an indoor running track, Olympic lap pool, and 53-foot climbing rock wall.',
+      image: '/assets/bric-climbing-wall.jpg',
+      telemetry: 'WALL HEIGHT: 53 FT // BELAY ROUTES: 24 // LEED GOLD'
     },
     {
       id: 4,
       name: 'W.K. Kellogg Arabian Horse Center',
       tag: 'EQUINE BIOTECHNOLOGY & BREEDING',
       desc: 'Founded in 1925 by breakfast cereal magnate W.K. Kellogg, housing world-champion purebred Arabians and hands-on veterinary labs.',
-      image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80',
+      image: '/assets/orientation-mares.jpg',
       telemetry: 'HERD COUNT: 85 // FOALING TELEMETRY // ARENA CAPACITY: 1,200'
     }
   ];

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Lora', 'Merriweather', Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-display: 'Syne', 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Cal Poly Pomona Brand Palette */
+  --color-cpp-green: #004731;
+  --color-cpp-forest: #003624;
+  --color-cpp-darkmoss: #002216;
+  --color-cpp-gold: #FFB81C;
+  --color-cpp-lime: #A4D65E;
+  --color-cpp-crimson: #A6192E;
+  --color-cpp-cream: #F8F9F5;
+  --color-cpp-sand: #EAE6DF;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #004731;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #003624;
+}
+
+.polytechnic-heading {
+  font-family: 'Syne', 'Space Grotesk', sans-serif;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cad-crosshatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(164, 214, 94, 0.5),
+    rgba(164, 214, 94, 0.5) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+}
+
+.cad-grid-light {
+  background-size: 28px 28px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 71, 49, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 71, 49, 0.08) 1px, transparent 1px);
+}
+
+/* Gold Blueprint Grid used in the Apply Drone section (Image 5) */
+.gold-grid {
+  background-color: #FFB81C;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px);
+}

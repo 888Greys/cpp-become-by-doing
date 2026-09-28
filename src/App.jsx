@@ -17,6 +17,7 @@ import MajorFinder from './components/MajorFinder.jsx';
 import CampusProvingGrounds from './components/CampusProvingGrounds.jsx';
 import InstitutionalFooter from './components/InstitutionalFooter.jsx';
 import StoryModal from './components/StoryModal.jsx';
+import CalStateApply from './components/CalStateApply.jsx';
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +26,24 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [storyModalOpen, setStoryModalOpen] = useState(false);
+  const [applyOpen, setApplyOpen] = useState(false);
   const videoRef = useRef(null);
+
+  // Sync hash routing: if URL has #apply or /apply, open the Apply Portal automatically
+  useEffect(() => {
+    const handleLocation = () => {
+      if (window.location.hash === '#apply' || window.location.pathname.startsWith('/apply')) {
+        setApplyOpen(true);
+      }
+    };
+    handleLocation();
+    window.addEventListener('hashchange', handleLocation);
+    window.addEventListener('popstate', handleLocation);
+    return () => {
+      window.removeEventListener('hashchange', handleLocation);
+      window.removeEventListener('popstate', handleLocation);
+    };
+  }, []);
 
   const slides = [
     {
@@ -98,7 +116,12 @@ export default function App() {
 
           {/* Quick Nav Links (APPLY, VISIT, INFO, GIVE, MYCPP) */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-[13px] font-bold tracking-widest text-[#004731]">
-            <a href="#apply" className="hover:text-[#ffb81c] transition-colors">APPLY</a>
+            <button 
+              onClick={() => { setApplyOpen(true); window.location.hash = 'apply'; }} 
+              className="hover:text-[#ffb81c] transition-colors cursor-pointer"
+            >
+              APPLY
+            </button>
             <a href="#visit" className="hover:text-[#ffb81c] transition-colors">VISIT</a>
             <a href="#info" className="hover:text-[#ffb81c] transition-colors">INFO</a>
             <a href="#give" className="hover:text-[#ffb81c] transition-colors">GIVE</a>
@@ -310,7 +333,9 @@ export default function App() {
       <BecomeABronco />
 
       {/* 4. GUARANTEED ADMISSIONS & DRONE HEXACOPTER SECTION (Image 5) */}
-      <GuaranteedAdmissions />
+      <GuaranteedAdmissions 
+        onOpenApply={() => { setApplyOpen(true); window.location.hash = 'apply'; }} 
+      />
 
       {/* 5. UNIVERSITY NEWS & ALUMNI AI STORIES SECTION (Image 3) */}
       <UniversityNews />
@@ -328,6 +353,7 @@ export default function App() {
       <FullscreenMenu 
         isOpen={menuOpen} 
         onClose={() => setMenuOpen(false)} 
+        onOpenApply={() => { setApplyOpen(true); window.location.hash = 'apply'; }}
       />
 
       {/* 10. STORY MODAL (Triggered via "SEE HOW") */}
@@ -335,6 +361,18 @@ export default function App() {
         <StoryModal 
           slide={slides[currentSlide]}
           onClose={() => setStoryModalOpen(false)}
+        />
+      )}
+
+      {/* 11. CAL STATE APPLY PORTAL EXPERIENCE (Exact Match to User Screenshots) */}
+      {applyOpen && (
+        <CalStateApply 
+          onClose={() => {
+            setApplyOpen(false);
+            if (window.location.hash === '#apply') {
+              window.history.pushState('', document.title, window.location.pathname + window.location.search);
+            }
+          }}
         />
       )}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
-export default function GuaranteedAdmissions() {
+export default function GuaranteedAdmissions({ onOpenApply }) {
   return (
     <section className="w-full bg-white py-16 sm:py-24 border-b border-gray-200">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 items-center">
@@ -40,15 +40,13 @@ export default function GuaranteedAdmissions() {
 
           {/* Lime Green Button with External Arrow Icon */}
           <div className="pt-3">
-            <a
-              href="https://www.calstate.edu/apply"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 bg-[#A4D65E] hover:bg-[#b5e772] text-[#003624] font-display font-extrabold text-xs sm:text-sm tracking-wider uppercase px-8 py-3.5 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            <button
+              onClick={() => { if (onOpenApply) onOpenApply(); }}
+              className="inline-flex items-center gap-3 bg-[#A4D65E] hover:bg-[#b5e772] text-[#003624] font-display font-extrabold text-xs sm:text-sm tracking-wider uppercase px-8 py-3.5 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
             >
               <span>APPLY NOW</span>
               <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-            </a>
+            </button>
           </div>
 
         </div>

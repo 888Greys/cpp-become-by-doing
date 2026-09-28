@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Search, Plus, Minus } from 'lucide-react';
 
-export default function FullscreenMenu({ isOpen, onClose }) {
+export default function FullscreenMenu({ isOpen, onClose, onOpenApply }) {
   const [expandedSection, setExpandedSection] = useState(null);
 
   if (!isOpen) return null;
@@ -52,7 +52,12 @@ export default function FullscreenMenu({ isOpen, onClose }) {
         {/* Right Nav Action Links */}
         <div className="flex items-center gap-4 sm:gap-7">
           <div className="hidden md:flex items-center gap-6 text-xs font-bold tracking-widest text-[#FFB81C]">
-            <a href="#apply" onClick={onClose} className="hover:text-white transition-colors">APPLY</a>
+            <button 
+              onClick={() => { onClose(); if (onOpenApply) onOpenApply(); }} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              APPLY
+            </button>
             <a href="#visit" onClick={onClose} className="hover:text-white transition-colors">VISIT</a>
             <a href="#info" onClick={onClose} className="hover:text-white transition-colors">INFO</a>
             <a href="#give" onClick={onClose} className="hover:text-white transition-colors">GIVE</a>

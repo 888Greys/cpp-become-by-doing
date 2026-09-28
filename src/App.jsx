@@ -18,6 +18,7 @@ import CampusProvingGrounds from './components/CampusProvingGrounds.jsx';
 import InstitutionalFooter from './components/InstitutionalFooter.jsx';
 import StoryModal from './components/StoryModal.jsx';
 import CalStateApply from './components/CalStateApply.jsx';
+import CsuApplyLanding from './components/CsuApplyLanding.jsx';
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,14 +27,20 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [storyModalOpen, setStoryModalOpen] = useState(false);
-  const [applyOpen, setApplyOpen] = useState(false);
+  // applyView: 'none' | 'landing' | 'portal'
+  const [applyView, setApplyView] = useState('none');
+  const [appliedTerm, setAppliedTerm] = useState('Fall 2027');
   const videoRef = useRef(null);
 
-  // Sync hash routing: if URL has #apply or /apply, open the Apply Portal automatically
+  // Sync hash routing: if URL has #apply or /apply, open Apply Landing or Portal
   useEffect(() => {
     const handleLocation = () => {
-      if (window.location.hash === '#apply' || window.location.pathname.startsWith('/apply')) {
-        setApplyOpen(true);
+      const hash = window.location.hash;
+      const path = window.location.pathname;
+      if (hash === '#apply/portal' || path.startsWith('/apply/portal')) {
+        setApplyView('portal');
+      } else if (hash === '#apply' || path.startsWith('/apply')) {
+        setApplyView('landing');
       }
     };
     handleLocation();
@@ -117,7 +124,7 @@ export default function App() {
           {/* Quick Nav Links (APPLY, VISIT, INFO, GIVE, MYCPP) */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-[13px] font-bold tracking-widest text-[#004731]">
             <button 
-              onClick={() => { setApplyOpen(true); window.location.hash = 'apply'; }} 
+              onClick={() => { setApplyView('landing'); window.location.hash = 'apply'; }} 
               className="hover:text-[#ffb81c] transition-colors cursor-pointer"
             >
               APPLY
@@ -334,7 +341,7 @@ export default function App() {
 
       {/* 4. GUARANTEED ADMISSIONS & DRONE HEXACOPTER SECTION (Image 5) */}
       <GuaranteedAdmissions 
-        onOpenApply={() => { setApplyOpen(true); window.location.hash = 'apply'; }} 
+        onOpenApply={() => { setApplyView('landing'); window.location.hash = 'apply'; }} 
       />
 
       {/* 5. UNIVERSITY NEWS & ALUMNI AI STORIES SECTION (Image 3) */}
@@ -353,7 +360,7 @@ export default function App() {
       <FullscreenMenu 
         isOpen={menuOpen} 
         onClose={() => setMenuOpen(false)} 
-        onOpenApply={() => { setApplyOpen(true); window.location.hash = 'apply'; }}
+        onOpenApply={() => { setApplyView('landing'); window.location.hash = 'apply'; }}
       />
 
       {/* 10. STORY MODAL (Triggered via "SEE HOW") */}
@@ -364,14 +371,32 @@ export default function App() {
         />
       )}
 
-      {/* 11. CAL STATE APPLY PORTAL EXPERIENCE (Exact Match to User Screenshots) */}
-      {applyOpen && (
+      {/* 11. CSU APPLY LANDING PAGE ("Go From Here. | CSU" - calstate.edu/apply) */}
+      {applyView === 'landing' && (
+        <CsuApplyLanding 
+          onStartApplication={(term) => {
+            setAppliedTerm(term);
+            setApplyView('portal');
+            window.location.hash = 'apply/portal';
+          }}
+          onBackToCpp={() => {
+            setApplyView('none');
+            window.history.pushState('', document.title, window.location.pathname + window.location.search);
+          }}
+        />
+      )}
+
+      {/* 12. CAL STATE APPLY PORTAL EXPERIENCE (calstate.cas.myliaison.com) */}
+      {applyView === 'portal' && (
         <CalStateApply 
+          selectedTerm={appliedTerm}
+          onBackToLanding={() => {
+            setApplyView('landing');
+            window.location.hash = 'apply';
+          }}
           onClose={() => {
-            setApplyOpen(false);
-            if (window.location.hash === '#apply') {
-              window.history.pushState('', document.title, window.location.pathname + window.location.search);
-            }
+            setApplyView('none');
+            window.history.pushState('', document.title, window.location.pathname + window.location.search);
           }}
         />
       )}

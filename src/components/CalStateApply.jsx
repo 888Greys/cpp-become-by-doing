@@ -10,11 +10,31 @@ import {
   ExternalLink
 } from 'lucide-react';
 
-export default function CalStateApply({ onClose }) {
+export default function CalStateApply({ onClose, onBackToLanding, selectedTerm = 'Fall 2027' }) {
   // Navigation / multi-step state: 'create-account' -> 'loading' -> 'add-program'
   const [currentStep, setCurrentStep] = useState('create-account');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Dynamic favicon & title
+  useEffect(() => {
+    const originalTitle = document.title;
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'shortcut icon';
+      document.head.appendChild(link);
+    }
+    const originalFavicon = link.href;
+
+    document.title = "Cal State Apply | Create an Account";
+    link.href = '/assets/csuicon.ico';
+
+    return () => {
+      document.title = originalTitle;
+      link.href = originalFavicon;
+    };
+  }, []);
 
   // Form State initialized with user context
   const [formData, setFormData] = useState({

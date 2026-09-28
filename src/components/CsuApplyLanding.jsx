@@ -108,7 +108,7 @@ export default function CsuApplyLanding({ onStartApplication, onBackToCpp }) {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#222] font-sans overflow-x-hidden selection:bg-[#C41230] selection:text-white">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-white text-[#222] font-sans selection:bg-[#C41230] selection:text-white animate-in fade-in duration-150">
       
       {/* 1. TOP BROWSER CONTEXT BAR */}
       <div className="bg-[#1e293b] text-white text-[11px] px-4 py-1.5 flex items-center justify-between border-b border-gray-700">

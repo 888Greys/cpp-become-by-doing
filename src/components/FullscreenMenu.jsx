@@ -50,18 +50,18 @@ export default function FullscreenMenu({ isOpen, onClose, onOpenApply }) {
         </a>
 
         {/* Right Nav Action Links */}
-        <div className="flex items-center gap-4 sm:gap-7">
-          <div className="hidden md:flex items-center gap-6 text-xs font-bold tracking-widest text-[#FFB81C]">
+        <div className="flex items-center gap-3 sm:gap-7">
+          <div className="flex items-center gap-4 sm:gap-6 text-xs font-bold tracking-widest text-[#FFB81C]">
             <button 
               onClick={() => { onClose(); if (onOpenApply) onOpenApply(); }} 
-              className="hover:text-white transition-colors cursor-pointer"
+              className="bg-[#FFB81C] hover:bg-[#ffc33b] text-[#003624] font-extrabold text-xs px-3 py-1.5 rounded shadow cursor-pointer md:bg-transparent md:text-[#FFB81C] md:hover:text-white md:p-0 md:shadow-none transition-colors"
             >
               APPLY
             </button>
-            <a href="#visit" onClick={onClose} className="hover:text-white transition-colors">VISIT</a>
-            <a href="#info" onClick={onClose} className="hover:text-white transition-colors">INFO</a>
-            <a href="#give" onClick={onClose} className="hover:text-white transition-colors">GIVE</a>
-            <a href="https://my.cpp.edu" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">MYCPP</a>
+            <a href="#visit" onClick={onClose} className="hidden md:inline hover:text-white transition-colors">VISIT</a>
+            <a href="#info" onClick={onClose} className="hidden md:inline hover:text-white transition-colors">INFO</a>
+            <a href="#give" onClick={onClose} className="hidden md:inline hover:text-white transition-colors">GIVE</a>
+            <a href="https://my.cpp.edu" target="_blank" rel="noreferrer" className="hidden md:inline hover:text-white transition-colors">MYCPP</a>
           </div>
 
           <button className="text-white hover:text-[#FFB81C] transition-colors p-1" title="Search">
@@ -114,14 +114,18 @@ export default function FullscreenMenu({ isOpen, onClose, onOpenApply }) {
               {item.hasSub && expandedSection === item.title && (
                 <div className="pl-4 sm:pl-6 py-3 space-y-2 max-w-md border-l-2 border-emerald-700/60 mt-2 animate-in fade-in duration-150">
                   {item.subLinks.map((sub, sIdx) => (
-                    <a
+                    <button
                       key={sIdx}
-                      href={`#${sub.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                      onClick={onClose}
-                      className="block text-xs sm:text-sm font-sans text-emerald-100 hover:text-[#FFB81C] transition-colors py-1"
+                      onClick={() => {
+                        onClose();
+                        if (sub.toLowerCase().includes('apply') && onOpenApply) {
+                          onOpenApply();
+                        }
+                      }}
+                      className="block text-left text-xs sm:text-sm font-sans text-emerald-100 hover:text-[#FFB81C] transition-colors py-1 cursor-pointer"
                     >
                       {sub}
-                    </a>
+                    </button>
                   ))}
                 </div>
               )}

@@ -37,10 +37,12 @@ export default function App() {
     const handleLocation = () => {
       const hash = window.location.hash;
       const path = window.location.pathname;
-      if (hash === '#apply/portal' || path.startsWith('/apply/portal')) {
+      if (hash.startsWith('#apply/portal') || path.startsWith('/apply/portal')) {
         setApplyView('portal');
-      } else if (hash === '#apply' || path.startsWith('/apply')) {
+      } else if (hash.startsWith('#apply') || path.startsWith('/apply')) {
         setApplyView('landing');
+      } else {
+        setApplyView('none');
       }
     };
     handleLocation();
@@ -137,6 +139,13 @@ export default function App() {
 
           {/* Search Icon & Hamburger Menu Toggle */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Mobile / Tablet Quick APPLY Button */}
+            <button 
+              onClick={() => { setApplyView('landing'); window.location.hash = 'apply'; }} 
+              className="lg:hidden bg-[#ffb81c] hover:bg-[#e6a517] text-[#003624] font-display font-extrabold text-xs tracking-wider uppercase px-3 py-1.5 shadow-sm transition-colors cursor-pointer"
+            >
+              APPLY
+            </button>
             {searchOpen ? (
               <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 text-sm border border-gray-300">
                 <input 
@@ -257,13 +266,19 @@ export default function App() {
                   </h1>
                 </div>
 
-                {/* Lime Green "SEE HOW" Button (Exact Match to Screenshot) */}
-                <div className="mt-3.5 sm:mt-5 ml-3 sm:ml-6">
+                {/* Lime Green "SEE HOW" & Gold "APPLY TODAY" Buttons */}
+                <div className="mt-3.5 sm:mt-5 ml-3 sm:ml-6 flex items-center gap-2 sm:gap-3">
                   <button 
                     onClick={() => setStoryModalOpen(true)}
-                    className="bg-[#a4d65e] hover:bg-[#b5e772] text-[#003624] font-extrabold text-xs sm:text-sm tracking-wider uppercase px-6 sm:px-9 py-2 sm:py-3 rounded-none shadow transition-transform transform active:scale-95 cursor-pointer"
+                    className="bg-[#a4d65e] hover:bg-[#b5e772] text-[#003624] font-extrabold text-xs sm:text-sm tracking-wider uppercase px-5 sm:px-8 py-2 sm:py-3 rounded-none shadow transition-transform transform active:scale-95 cursor-pointer"
                   >
                     SEE HOW
+                  </button>
+                  <button 
+                    onClick={() => { setApplyView('landing'); window.location.hash = 'apply'; }}
+                    className="bg-[#ffb81c] hover:bg-[#ffc547] text-[#003624] font-extrabold text-xs sm:text-sm tracking-wider uppercase px-4 sm:px-7 py-2 sm:py-3 rounded-none shadow transition-transform transform active:scale-95 cursor-pointer"
+                  >
+                    APPLY TODAY
                   </button>
                 </div>
               </div>
